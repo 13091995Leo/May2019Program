@@ -20,10 +20,10 @@ public class ProjectApplicationTests {
 	@Autowired
 	Employee emp;
 	
-	
 	@Test
 	public void exampleProjecttest() {
 		System.out.println("Project Test Case Scenarios.");
-		empService.registerEmployee(emp);
+		empService.registerOrUpdateEmployee(emp);
 	}
+	
 }
