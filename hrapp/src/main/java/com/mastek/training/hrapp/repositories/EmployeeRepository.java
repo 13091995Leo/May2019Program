@@ -16,4 +16,5 @@ public interface EmployeeRepository extends CrudRepository <Employee, Integer> {
 			@Param("min") Double min, // declare parameter name.
 			@Param("max") Double max);
 			
+	
 }

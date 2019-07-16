@@ -43,7 +43,6 @@ public class EmployeeService {
 	}
 
 	public void deleteByEmployeeNumber(int empno) {
-		// 
 		employeeRepository.deleteById(empno);
 	}
 	

@@ -1,13 +1,20 @@
 package com.mastek.training.hrapp.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -39,7 +46,65 @@ public class Employee
 
 	@Value("1000.0")
 	private double salary;
+
+/////////////////////////////////////////////////////// MANY to MANY association.
 	
+	
+	private Set<Project> assignments = new HashSet<>();
+
+//@ManyToMany: Configuring the association for both entities.
+//@JoinTable:  provides all the configurations for the third table.
+//name: name of the join table
+// joinColumns: Foreign key column name for current class
+// inveserJoinColumns : foreign key column for other class.
+	
+
+//////////////////////////////////////////////////////MANY to MANY association.
+	
+
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(
+			name = "JPA_ASSIGNMENTS",
+			joinColumns = @JoinColumn(name = "FK_EMPNO"),
+			inverseJoinColumns = @JoinColumn(name="FK_PROJECTID")
+	)
+
+	public Set<Project> getAssignments() {
+		return assignments;
+	}
+
+	public void setAssignments(Set<Project> assignments) {
+		this.assignments = assignments;
+	}
+
+	
+////////////////////////////////////////////////////// MANY to MANY association. END
+	
+
+////////////////////////////////////////////////////// ASSOCIATION one to MANY
+	
+
+
+	private Department currentDepartment;
+	
+	// @AMANYTOONE: associating the many class to one object
+	// @JoinColumn: Configure the foreign key column 
+	// for th association or the two entites.
+	
+	
+	@ManyToOne
+	@JoinColumn(name="FK_DepartmentId")
+	public Department getCurrentDepartment() {
+		return currentDepartment;
+	}
+
+
+	public void setCurrentDepartment(Department currentDepartment) {
+		this.currentDepartment = currentDepartment;
+	}
+
+///////////////////////////////////////////////////// ASSOCIATION one to Many
+
 	public Employee() {
 		System.out.println("Employee Created");
 	}

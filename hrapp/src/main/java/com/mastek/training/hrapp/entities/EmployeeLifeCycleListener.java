@@ -32,7 +32,6 @@ public class EmployeeLifeCycleListener {
 		System.out.println("After Update : " + e);
 	}
 	
-	
 	@PreRemove
 	public void beforeDelete(Employee e) {
 		System.out.println("Before Remove : " + e);
